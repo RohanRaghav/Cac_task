@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
-
+import Background from './Components/Background';
+import Cac from './Components/Cac';
+import Sidebar from './Components/SideBar';
 function App() {
+  const [visibleIds, setVisibleIds] = useState([]);
+
+  const handleInView = (id) => {
+    setVisibleIds(prevIds => {
+      if (!prevIds.includes(id)) {
+        return [...prevIds, id];
+      }
+      return prevIds;
+    });
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+<img src='Cac_logo.png' alt='abc' className='image' />
+<Sidebar visibleIds={visibleIds} />
+<Cac id="About" onInView={handleInView} />
+      <Background />
     </div>
+
   );
 }
 
